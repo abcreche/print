@@ -1,0 +1,13 @@
+<?php
+
+namespace DummyNamespace;
+
+use ABCreche\Printer\PrintTemplate;
+
+class DummyClass implements PrintTemplate
+{
+    public function build()
+    {
+        return $this->write('Hello There');
+    }
+}

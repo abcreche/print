@@ -141,3 +141,11 @@ Then you can use chrome dev tools to render the print version of the page
 ![](https://i.stack.imgur.com/7BCx7.png)
 
 Image from [this stackoverflow post](https://stackoverflow.com/questions/9540990/using-chromes-element-inspector-in-print-preview-mode)
+
+## TODO
+
+Support:
+- https://laravelpackages.net/barryvdh/laravel-snappy
+- https://laravelpackages.net/nitmedia/wkhtml2pdf
+- https://laravelpackages.net/spatie/browsershot
+- dompdf

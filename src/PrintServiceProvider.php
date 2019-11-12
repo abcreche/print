@@ -3,6 +3,7 @@
 namespace ABCreche\Printer;
 
 use Illuminate\Support\ServiceProvider;
+use ABCreche\Printer\Console\PrintTemplateMakeCommand;
 
 class PrintServiceProvider extends ServiceProvider
 {
@@ -28,5 +29,9 @@ class PrintServiceProvider extends ServiceProvider
         });
 
         $this->app->alias('printer', Printer::class);
+
+        $this->commands([
+            PrintTemplateMakeCommand::class,
+        ]);
     }
 }
