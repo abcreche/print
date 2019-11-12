@@ -114,3 +114,29 @@ You can choose the orientation of the document by setting the orientation proper
 // Options: 'portrait', 'landscape'
 protected $orientation = 'portrait';
 ```
+
+#### Page Margins
+
+You can set the page margins.
+
+```php
+// Default: 25mm
+protected $pageMargin = '25mm';
+```
+
+### Preview
+
+You can preview any PrintTemplate by simply returning it from the controller
+
+```php
+Route::get('printer', function () {
+    $receipt = App\Receipt::find(1);
+
+    return new App\PrintTemplates\ReceiptTemplate($receipt);
+});
+```
+
+Then you can use chrome dev tools to render the print version of the page
+
+![](https://i.stack.imgur.com/7BCx7.png)
+Image from [this stackoverflow post](https://stackoverflow.com/questions/9540990/using-chromes-element-inspector-in-print-preview-mode)

@@ -13,6 +13,7 @@ class PrintServiceProviderTest extends TestCase
     {
         $this->assertTrue($this->app->bound('printer'));
     }
+
     /**
      * @test
      */
