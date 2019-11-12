@@ -25,18 +25,18 @@
     },
     "autoload": {
         "psr-4": {
-            "ABCreche\\Print\\": "src/"
+            "ABCreche\\Printer\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ABCreche\\Print\\Test\\": "tests"
+            "ABCreche\\Printer\\Test\\": "tests"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "ABCreche\\Print\\PrintServiceProvider"
+                "ABCreche\\Printer\\PrintServiceProvider"
             ]
         }
     },

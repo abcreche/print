@@ -44,14 +44,14 @@ In your controller you can generate the PDF for this print template now:
 namespace App\Http\Controllers;
 
 use App\Receipt;
-use ABCreche\Print\Facades\Print;
+use ABCreche\Printer\Facades\Printer;
 use App\PrintTemplates\ReceiptTemplate;
 
 class ReceiptController extends Controller
 {
     public function print(Receipt $receipt)
     {
-        return Print::download(new ReceiptTemplate($receipt), 'receipt.pdf');
+        return Printer::download(new ReceiptTemplate($receipt), 'receipt.pdf');
     }
 }
 ```
@@ -66,7 +66,7 @@ This is how your Print Template look by default:
 namespace App\PrintTemplates;
 
 use App\Receipt;
-use ABCreche\Print\PrintTemplate;
+use ABCreche\Printer\Printer;
 
 class ReceiptTemplate implements PrintTemplate
 {
