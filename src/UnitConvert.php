@@ -22,15 +22,36 @@ class UnitConvert
     protected function setPixels($pixels)
     {
         $this->pixels = $pixels;
+
+        return $this;
     }
 
     protected function setMilimeters($milimeters)
     {
         $this->milimeters = $milimeters;
+
+        return $this;
     }
 
     protected function setInches($inches)
     {
         $this->inches = $inches;
+
+        return $this;
+    }
+
+    public function toPixels()
+    {
+        return $this->pixels;
+    }
+
+    public function toMilimeters()
+    {
+        return $this->milimeters;
+    }
+
+    public function toInches()
+    {
+        return $this->inches;
     }
 }
