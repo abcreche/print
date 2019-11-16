@@ -28,26 +28,60 @@ abstract class PrintTemplate
                 )
                 ->toArray()
         );
+
+        return $this;
     }
 
-    public function top($position)
+    public function top($position, $unit = 'pixels')
     {
-        # code...
+        $writings = $this->getWritings();
+        $last = $writings->last();
+        $last['top'] = $position;
+        $writings->pop();
+        $this->setWritings(
+            $writings->push($last)->toArray()
+        );
+
+        return $this;
     }
 
-    public function right($position)
+    public function right($position, $unit = 'pixels')
     {
-        # code...
+        $writings = $this->getWritings();
+        $last = $writings->last();
+        $last['right'] = $position;
+        $writings->pop();
+        $this->setWritings(
+            $writings->push($last)->toArray()
+        );
+
+        return $this;
     }
 
-    public function bottom($position)
+    public function bottom($position, $unit = 'pixels')
     {
-        # code...
+        $writings = $this->getWritings();
+        $last = $writings->last();
+        $last['bottom'] = $position;
+        $writings->pop();
+        $this->setWritings(
+            $writings->push($last)->toArray()
+        );
+
+        return $this;
     }
 
-    public function left($position)
+    public function left($position, $unit = 'pixels')
     {
-        # code...
+        $writings = $this->getWritings();
+        $last = $writings->last();
+        $last['left'] = $position;
+        $writings->pop();
+        $this->setWritings(
+            $writings->push($last)->toArray()
+        );
+
+        return $this;
     }
 
     public function getWritings(): Collection
@@ -76,6 +110,6 @@ abstract class PrintTemplate
      */
     protected function convertUnit($unit)
     {
-        return UnitConvert::pixel($unit)->toMilimeters();
+        return UnitConvert::pixels($unit)->toMilimeters();
     }
 }

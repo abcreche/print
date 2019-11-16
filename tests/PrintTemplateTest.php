@@ -34,4 +34,26 @@ class PrintTemplateTest extends TestCase
         $this->assertEquals(0, $this->template->getWritings()->first()['bottom']);
         $this->assertEquals(0, $this->template->getWritings()->first()['left']);
     }
+
+    /** @test */
+    function data_can_be_overriden()
+    {
+        $this->template->write('first data')
+            ->top(5)
+            ->right(6)
+            ->bottom(7)
+            ->left(8);
+
+        $this->assertEquals(5, $this->template->getWritings()->first()['top']);
+        $this->assertEquals(6, $this->template->getWritings()->first()['right']);
+        $this->assertEquals(7, $this->template->getWritings()->first()['bottom']);
+        $this->assertEquals(8, $this->template->getWritings()->first()['left']);
+
+        $this->template->write('second data');
+
+        $this->assertEquals(0, $this->template->getWritings()->last()['top']);
+        $this->assertEquals(0, $this->template->getWritings()->last()['right']);
+        $this->assertEquals(0, $this->template->getWritings()->last()['bottom']);
+        $this->assertEquals(0, $this->template->getWritings()->last()['left']);
+    }
 }
