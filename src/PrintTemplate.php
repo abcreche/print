@@ -76,6 +76,6 @@ abstract class PrintTemplate
      */
     protected function convertUnit($unit)
     {
-        return UnitConvert::pixel()->toMilimeters();
+        return UnitConvert::pixel($unit)->toMilimeters();
     }
 }

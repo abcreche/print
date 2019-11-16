@@ -4,6 +4,12 @@ namespace ABCreche\Printer;
 
 class UnitConvert
 {
+    public $pixels;
+    public $milimeters;
+    public $inches;
+
+    // use 72 DPI dimensions
+
     public static function pixels($pixels)
     {
         return (new self)->setPixels($pixels);
@@ -42,16 +48,26 @@ class UnitConvert
 
     public function toPixels()
     {
-        return $this->pixels;
+        if ($this->milimeters) {
+            return $this->milimeters * 595 / 210;
+        }
     }
 
     public function toMilimeters()
     {
+        if ($this->inches) {
+            return $this->inches * 2.54 * 10;
+        }
+        if ($this->pixels) {
+            return $this->pixels / 595 * 210;
+        }
         return $this->milimeters;
     }
 
     public function toInches()
     {
-        return $this->inches;
+        if ($this->milimeters) {
+            return $this->milimeters / 25.4;
+        }
     }
 }
