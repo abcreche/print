@@ -99,6 +99,16 @@ abstract class PrintTemplate implements Renderable
         $this->setWritings($writings);
     }
 
+    public function serif()
+    {
+        $this->style('font-family', 'serif');
+    }
+
+    public function sansSerif()
+    {
+        $this->style('font-family', 'sans-serif');
+    }
+
     /**
      * Render the print temple into a view.
      *
@@ -109,6 +119,7 @@ abstract class PrintTemplate implements Renderable
         $this->build();
 
         return view('print::layout')
+            ->with('styles', $this->styles())
             ->with('orientation', $this->orientation)
             ->with('writings', $this->writings);
     }

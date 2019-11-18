@@ -8,6 +8,9 @@
                 line-height: 1.3;
                 background: #fff;
                 color: #000;
+                @foreach ($styles as $attribute => $property)
+                    {{$attribute}} : {{$property}};
+                @endforeach
             }
             @media print {
                 @page {
