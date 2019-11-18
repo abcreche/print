@@ -2,111 +2,37 @@
 
 namespace ABCreche\Printer;
 
-use Illuminate\Support\Collection;
+use ABCreche\Printer\Traits\HasImages;
+use ABCreche\Printer\Traits\HasStyles;
+use ABCreche\Printer\Traits\HasWritings;
+use ABCreche\Printer\Traits\HasOrientation;
 use Illuminate\Contracts\Support\Renderable;
 
 abstract class PrintTemplate implements Renderable
 {
-    use HasStyles;
+    use HasStyles, HasWritings, HasImages, HasOrientation;
 
-    /**
-     * Defines the orientation of the page when being printed
-     */
-    protected $orientation = 'portrait';
-
-    /**
-     * An array of texts which needs to be printed.
-     */
-    protected $writings = [];
-
-    /**
-     * Adds some text in the writings collection
-     */
-    public function write(string $text, $top = 0, $right = 0, $bottom = 0, $left = 0)
-    {
-        $this->setWritings(
-            $this->getWritings()
-                ->push(
-                    Writing::make($text, $top, $right, $bottom, $left)
-                )
-        );
-
-        return $this;
-    }
-
-    public function top($position, $unit = 'pixels')
-    {
-        $writing = $this->lastWriting();
-        $writing->top($position);
-
-        $this->replaceLastWriting($writing);
-
-        return $this;
-    }
-
-    public function right($position, $unit = 'pixels')
-    {
-        $writing = $this->lastWriting();
-        $writing->right($position);
-
-        $this->replaceLastWriting($writing);
-
-        return $this;
-    }
-
-    public function bottom($position, $unit = 'pixels')
-    {
-        $writing = $this->lastWriting();
-        $writing->bottom($position);
-
-        $this->replaceLastWriting($writing);
-
-        return $this;
-    }
-
-    public function left($position, $unit = 'pixels')
-    {
-        $writing = $this->lastWriting();
-        $writing->left($position);
-
-        $this->replaceLastWriting($writing);
-
-        return $this;
-    }
-
-    public function getWritings(): Collection
-    {
-        return collect($this->writings);
-    }
-
-    protected function setWritings($writings)
-    {
-        $this->writings = $writings;
-    }
-
-    protected function lastWriting(): Writing
-    {
-        return $this->getWritings()->last();
-    }
-
-    protected function replaceLastWriting(Writing $writing)
-    {
-        $writings = $this->getWritings();
-        $writings->pop();
-
-        $writings->push($writing);
-
-        $this->setWritings($writings);
-    }
+    public $pageMargin;
 
     public function serif()
     {
         $this->style('font-family', 'serif');
+
+        return $this;
     }
 
     public function sansSerif()
     {
         $this->style('font-family', 'sans-serif');
+
+        return $this;
+    }
+
+    public function margins(int $pixels)
+    {
+        $this->pageMargin = $pixels;
+
+        return $this;
     }
 
     /**
@@ -120,7 +46,9 @@ abstract class PrintTemplate implements Renderable
 
         return view('print::layout')
             ->with('styles', $this->styles())
+            ->with('pageMargin', $this->pageMargin)
             ->with('orientation', $this->orientation)
+            ->with('images', $this->images)
             ->with('writings', $this->writings);
     }
 

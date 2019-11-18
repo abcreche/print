@@ -8,6 +8,6 @@ class DummyClass extends PrintTemplate
 {
     public function build()
     {
-        return $this->write('Hello There');
+        $this->write('Hello There');
     }
 }

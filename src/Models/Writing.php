@@ -1,25 +1,24 @@
 <?php
 
-namespace ABCreche\Printer;
+namespace ABCreche\Printer\Models;
+
+use ABCreche\Printer\Traits\HasStyles;
 
 class Writing
 {
     use HasStyles;
 
     public $text;
-    public $top;
-    public $right;
-    public $bottom;
-    public $left;
 
-    public static function make($text, $top, $right, $bottom, $left)
+    public static function make($text, $top, $right, $bottom, $left, array $styles = [])
     {
         return (new self)
             ->text($text)
             ->top($top)
             ->right($right)
             ->bottom($bottom)
-            ->left($left);
+            ->left($left)
+            ->style($styles);
     }
 
     public function text(string $text)
