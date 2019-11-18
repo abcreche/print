@@ -2,9 +2,10 @@
 
 namespace ABCreche\Printer;
 
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Collection;
 
-abstract class PrintTemplate
+abstract class PrintTemplate implements Renderable
 {
     /**
      * Defines the orientation of the page when being printed
@@ -111,5 +112,15 @@ abstract class PrintTemplate
     protected function convertUnit($unit)
     {
         return UnitConvert::pixels($unit)->toMilimeters();
+    }
+
+    /**
+     * Render the print temple into a view.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function render()
+    {
+        return view('layout');
     }
 }

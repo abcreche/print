@@ -4,7 +4,7 @@ namespace DummyNamespace;
 
 use ABCreche\Printer\PrintTemplate;
 
-class DummyClass implements PrintTemplate
+class DummyClass extends PrintTemplate
 {
     public function build()
     {
