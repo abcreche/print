@@ -17,9 +17,14 @@
                 @endforeach
             }
             @media print {
+                body {
+                    width: 21cm;
+                    height: 29.7cm;
+                }
                 @page {
-                    size: {{ $orientation == 'portrait' ? '210mm 297mm' : '297mm 210mm' }};
-                    margin: {{ $pageMargin ?? '25mm' }};
+                    size: 21cm 29.7cm;
+                    /* size: {{ $orientation == 'portrait' ? '210mm 297mm' : '297mm 210mm' }}; */
+                    margin: {{ $pageMargin ?? '30mm 45mm 30mm 45mm' }};
                 }
             }
 
@@ -52,7 +57,7 @@
             <div class="text text-{{ $key }}">{{ $writing->text }}</div>
         @endforeach
 
-        @foreach ($images as $image)
+        @foreach ($images as $key => $image)
             <img src="{{ $image->path }}" class="image image-{{ $key }}">
         @endforeach
     </body>

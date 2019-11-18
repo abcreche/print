@@ -2,6 +2,7 @@
 
 namespace ABCreche\Printer;
 
+use ABCreche\Printer\ConverterManager;
 use Illuminate\Support\ServiceProvider;
 use ABCreche\Printer\Console\PrintTemplateMakeCommand;
 
@@ -14,7 +15,11 @@ class PrintServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'print');
+        if ($this->app->runningInConsole()) {
+            $this->registerPublishing();
+        }
+
+        $this->registerViews();
     }
 
     /**
@@ -24,8 +29,15 @@ class PrintServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('printer', function () {
-            return new Printer;
+        $this->mergeConfigFrom(
+            __DIR__ . '/../config/printer.php',
+            'printer'
+        );
+
+        $this->app->bind('printer', function ($app) {
+            $manager = new ConverterManager($app);
+
+            return new Printer($manager->driver());
         });
 
         $this->app->alias('printer', Printer::class);
@@ -33,5 +45,27 @@ class PrintServiceProvider extends ServiceProvider
         $this->commands([
             PrintTemplateMakeCommand::class,
         ]);
+    }
+
+    /**
+     * Register the package's publishable resources.
+     *
+     * @return void
+     */
+    protected function registerPublishing()
+    {
+        $this->publishes([
+            __DIR__ . '/../config/printer.php' => config_path('printer.php'),
+        ], 'printer-config');
+    }
+
+    /**
+     * Register the package views.
+     *
+     * @return void
+     */
+    public function registerViews()
+    {
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'print');
     }
 }

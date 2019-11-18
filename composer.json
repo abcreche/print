@@ -17,7 +17,8 @@
     ],
     "require": {
         "php": "^7.1",
-        "laravel/framework": "5.*|6.*"
+        "laravel/framework": "5.*|6.*",
+        "spatie/browsershot": "^3.33"
     },
     "require-dev": {
         "phpunit/phpunit": "^8.2",
