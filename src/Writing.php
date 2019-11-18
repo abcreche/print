@@ -4,13 +4,13 @@ namespace ABCreche\Printer;
 
 class Writing
 {
+    use HasStyles;
+
     public $text;
     public $top;
     public $right;
     public $bottom;
     public $left;
-
-    protected $styles = [];
 
     public static function make($text, $top, $right, $bottom, $left)
     {
@@ -31,48 +31,29 @@ class Writing
 
     public function top($unit)
     {
-        $this->top = $unit;
-        // UnitConvert::pixels($unit)->toMilimeters();
+        $this->style('top', $unit);
 
         return $this;
     }
 
     public function right($unit)
     {
-        $this->right = $unit;
-        // UnitConvert::pixels($unit)->toMilimeters();
+        $this->style('right', $unit);
 
         return $this;
     }
 
     public function bottom($unit)
     {
-        $this->bottom = $unit;
-        // UnitConvert::pixels($unit)->toMilimeters();
+        $this->style('bottom', $unit);
 
         return $this;
     }
 
     public function left($unit)
     {
-        $this->left = $unit;
-        // UnitConvert::pixels($unit)->toMilimeters();
+        $this->style('left', $unit);
 
         return $this;
-    }
-
-    public function style(string $attribute, string $property)
-    {
-        $this->styles[$attribute] = $property;
-    }
-
-    public function styles()
-    {
-        return array_merge([
-            'top' => $this->top,
-            'right' => $this->right,
-            'bottom' => $this->bottom,
-            'left' => $this->left,
-        ], $this->styles);
     }
 }

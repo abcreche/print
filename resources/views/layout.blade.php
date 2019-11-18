@@ -1,6 +1,14 @@
 <html>
     <head>
         <style>
+            body {
+                width: 100%;
+                margin: 0;
+                float: none;
+                line-height: 1.3;
+                background: #fff;
+                color: #000;
+            }
             @media print {
                 @page {
                     size: {{ $orientation == 'portrait' ? '210mm 297mm' : '297mm 210mm' }};

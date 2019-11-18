@@ -7,6 +7,8 @@ use Illuminate\Contracts\Support\Renderable;
 
 abstract class PrintTemplate implements Renderable
 {
+    use HasStyles;
+
     /**
      * Defines the orientation of the page when being printed
      */
