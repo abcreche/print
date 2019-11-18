@@ -44,10 +44,10 @@ class PrintTemplateTest extends TestCase
             ->bottom(7)
             ->left(8);
 
-        $this->assertEquals(5, $this->template->getWritings()->first()['top']);
-        $this->assertEquals(6, $this->template->getWritings()->first()['right']);
-        $this->assertEquals(7, $this->template->getWritings()->first()['bottom']);
-        $this->assertEquals(8, $this->template->getWritings()->first()['left']);
+        $this->assertEquals(5, $this->template->getWritings()->last()['top']);
+        $this->assertEquals(6, $this->template->getWritings()->last()['right']);
+        $this->assertEquals(7, $this->template->getWritings()->last()['bottom']);
+        $this->assertEquals(8, $this->template->getWritings()->last()['left']);
 
         $this->template->write('second data');
 
