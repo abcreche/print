@@ -55,10 +55,10 @@ class UnitConvert
 
     public function toMilimeters()
     {
-        if ($this->inches) {
+        if (!is_null($this->inches)) {
             return $this->inches * 2.54 * 10;
         }
-        if ($this->pixels) {
+        if (!is_null($this->pixels)) {
             return $this->pixels / 595 * 210;
         }
         return $this->milimeters;
@@ -69,5 +69,11 @@ class UnitConvert
         if ($this->milimeters) {
             return $this->milimeters / 25.4;
         }
+
+        if (!is_null($this->pixels)) {
+            return $this->pixels * 72;
+        }
+
+        return $this->inches;
     }
 }

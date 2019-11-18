@@ -2,8 +2,8 @@
 
 namespace ABCreche\Printer;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Collection;
+use Illuminate\Contracts\Support\Renderable;
 
 abstract class PrintTemplate implements Renderable
 {
@@ -25,9 +25,8 @@ abstract class PrintTemplate implements Renderable
         $this->setWritings(
             $this->getWritings()
                 ->push(
-                    $this->makeWriting($text, $top, $right, $bottom, $left)
+                    Writing::make($text, $top, $right, $bottom, $left)
                 )
-                ->toArray()
         );
 
         return $this;
@@ -35,52 +34,40 @@ abstract class PrintTemplate implements Renderable
 
     public function top($position, $unit = 'pixels')
     {
-        $writings = $this->getWritings();
-        $last = $writings->last();
-        $last['top'] = $position;
-        $writings->pop();
-        $this->setWritings(
-            $writings->push($last)->toArray()
-        );
+        $writing = $this->lastWriting();
+        $writing->top($position);
+
+        $this->replaceLastWriting($writing);
 
         return $this;
     }
 
     public function right($position, $unit = 'pixels')
     {
-        $writings = $this->getWritings();
-        $last = $writings->last();
-        $last['right'] = $position;
-        $writings->pop();
-        $this->setWritings(
-            $writings->push($last)->toArray()
-        );
+        $writing = $this->lastWriting();
+        $writing->right($position);
+
+        $this->replaceLastWriting($writing);
 
         return $this;
     }
 
     public function bottom($position, $unit = 'pixels')
     {
-        $writings = $this->getWritings();
-        $last = $writings->last();
-        $last['bottom'] = $position;
-        $writings->pop();
-        $this->setWritings(
-            $writings->push($last)->toArray()
-        );
+        $writing = $this->lastWriting();
+        $writing->bottom($position);
+
+        $this->replaceLastWriting($writing);
 
         return $this;
     }
 
     public function left($position, $unit = 'pixels')
     {
-        $writings = $this->getWritings();
-        $last = $writings->last();
-        $last['left'] = $position;
-        $writings->pop();
-        $this->setWritings(
-            $writings->push($last)->toArray()
-        );
+        $writing = $this->lastWriting();
+        $writing->left($position);
+
+        $this->replaceLastWriting($writing);
 
         return $this;
     }
@@ -90,28 +77,24 @@ abstract class PrintTemplate implements Renderable
         return collect($this->writings);
     }
 
-    protected function setWritings(array $writings)
+    protected function setWritings($writings)
     {
         $this->writings = $writings;
     }
 
-    protected function makeWriting(string $text, $top = 0, $right = 0, $bottom = 0, $left = 0): array
+    protected function lastWriting(): Writing
     {
-        return [
-            'text' => $text,
-            'top' => $this->convertUnit($top),
-            'right' => $this->convertUnit($right),
-            'bottom' => $this->convertUnit($bottom),
-            'left' => $this->convertUnit($left),
-        ];
+        return $this->getWritings()->last();
     }
 
-    /**
-     * Convert any unit to milimeter
-     */
-    protected function convertUnit($unit)
+    protected function replaceLastWriting(Writing $writing)
     {
-        return UnitConvert::pixels($unit)->toMilimeters();
+        $writings = $this->getWritings();
+        $writings->pop();
+
+        $writings->push($writing);
+
+        $this->setWritings($writings);
     }
 
     /**
@@ -121,6 +104,15 @@ abstract class PrintTemplate implements Renderable
      */
     public function render()
     {
-        return view('layout');
+        $this->build();
+
+        return view('print::layout')
+            ->with('orientation', $this->orientation)
+            ->with('writings', $this->writings);
+    }
+
+    public function build()
+    {
+        //
     }
 }
