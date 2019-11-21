@@ -142,6 +142,11 @@ Then you can use chrome dev tools to render the print version of the page
 
 Image from [this stackoverflow post](https://stackoverflow.com/questions/9540990/using-chromes-element-inspector-in-print-preview-mode)
 
+Then switch the dev tools to device rendering and set the dimension of the page at
+- A4 : 595 x 842
+
+Working with a preview like this will help you buld your templates. When converting them to pdf, they will be exactly like the preview.
+
 ## TODO
 
 Support:
