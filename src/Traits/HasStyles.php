@@ -2,10 +2,15 @@
 
 namespace ABCreche\Printer\Traits;
 
+use Illuminate\Support\Collection;
+
 trait HasStyles
 {
     protected $styles = [];
 
+    /**
+     * Add one style rule to the styles array
+     */
     public function style($attribute, $property = null)
     {
         if (is_array($attribute)) {
@@ -19,8 +24,13 @@ trait HasStyles
         return $this;
     }
 
-    public function styles(): array
+    /**
+     * Get the styles as a Collection
+     *
+     * @return Collection
+     */
+    public function styles(): Collection
     {
-        return $this->styles;
+        return collect($this->styles);
     }
 }

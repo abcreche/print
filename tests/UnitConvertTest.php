@@ -17,18 +17,24 @@ class UnitConvertTest extends TestCase
     /** @test */
     public function milimeter_to_pixels()
     {
-        $this->assertEquals(595, UnitConvert::milimeters(210)->toPixels());
+        $this->assertEquals('595px', UnitConvert::milimeters(210)->toPixels());
     }
 
     /** @test */
     public function pixels_to_milimeters()
     {
-        $this->assertEquals(210, UnitConvert::pixels(595)->toMilimeters());
+        $this->assertEquals('210mm', UnitConvert::pixels(595)->toMilimeters());
+    }
+
+    /** @test */
+    public function inches_to_milimeters()
+    {
+        $this->assertEquals('25.4mm', UnitConvert::inches(1)->toMilimeters());
     }
 
     /** @test */
     public function milimeter_to_inches()
     {
-        $this->assertEquals(25.4, UnitConvert::inches(1)->toMilimeters());
+        $this->assertEquals(1, UnitConvert::milimeters(25.4)->toInches());
     }
 }

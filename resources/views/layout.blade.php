@@ -22,8 +22,7 @@
                     height: 29.7cm;
                 }
                 @page {
-                    size: 21cm 29.7cm;
-                    /* size: {{ $orientation == 'portrait' ? '210mm 297mm' : '297mm 210mm' }}; */
+                    size: {{ $orientation == 'portrait' ? '210mm 297mm' : '297mm 210mm' }};
                     margin: {{ $pageMargin ?? '30mm 45mm 30mm 45mm' }};
                 }
             }

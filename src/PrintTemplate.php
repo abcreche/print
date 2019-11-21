@@ -8,6 +8,7 @@ use ABCreche\Printer\Traits\HasWritings;
 use ABCreche\Printer\Traits\HasOrientation;
 use ABCreche\Printer\Traits\HasViews;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\View\View;
 
 abstract class PrintTemplate implements Renderable
 {
@@ -41,7 +42,7 @@ abstract class PrintTemplate implements Renderable
      *
      * @return \Illuminate\View\View
      */
-    public function render()
+    public function render(): View
     {
         $this->build();
 

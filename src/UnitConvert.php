@@ -48,20 +48,26 @@ class UnitConvert
 
     public function toPixels()
     {
-        if ($this->milimeters) {
-            return $this->milimeters * 595 / 210;
-        }
+        return $this->prependUnit('px', function () {
+            if ($this->milimeters) {
+                return $this->milimeters * 595 / 210;
+            }
+
+            return $this->pixels;
+        });
     }
 
     public function toMilimeters()
     {
-        if (!is_null($this->inches)) {
-            return $this->inches * 2.54 * 10;
-        }
-        if (!is_null($this->pixels)) {
-            return $this->pixels / 595 * 210;
-        }
-        return $this->milimeters;
+        return $this->prependUnit('mm', function () {
+            if (!is_null($this->inches)) {
+                return $this->inches * 2.54 * 10;
+            }
+            if (!is_null($this->pixels)) {
+                return $this->pixels / 595 * 210;
+            }
+            return $this->milimeters;
+        });
     }
 
     public function toInches()
@@ -75,5 +81,12 @@ class UnitConvert
         }
 
         return $this->inches;
+    }
+
+    public function prependUnit($unit, $callback)
+    {
+        $digit = $callback();
+
+        return $digit . $unit;
     }
 }
