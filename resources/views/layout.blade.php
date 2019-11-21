@@ -28,12 +28,23 @@
                 }
             }
 
-            .text {position: absolute; z-index: 1;}
+            .view {position: absolute; z-index: 1;}
+            .text {position: absolute; z-index: 2;}
             .image {position: absolute; z-index: 0;}
 
             @foreach ($writings as $key => $writing)
                 .text-{{$key}} {
                     @foreach ($writing->styles() as $attribute => $property)
+                        @if (!is_null($property))
+                            {{$attribute}} : {{$property}};
+                        @endif
+                    @endforeach
+                }
+            @endforeach
+
+            @foreach ($views as $key => $view)
+                .view-{{$key}} {
+                    @foreach ($view->styles() as $attribute => $property)
                         @if (!is_null($property))
                             {{$attribute}} : {{$property}};
                         @endif
@@ -53,6 +64,10 @@
         </style>
     </head>
     <body>
+        @foreach ($views as $key => $view)
+            <div class="view view-{{ $key }}">{!! $view->html !!}</div>
+        @endforeach
+
         @foreach ($writings as $key => $writing)
             <div class="text text-{{ $key }}">{{ $writing->text }}</div>
         @endforeach
