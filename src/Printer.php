@@ -14,7 +14,7 @@ class Printer
 
     public function download(PrintTemplate $printTemplate, string $fileName, array $headers = [])
     {
-        $fileName = Str::finish($fileName, '.pdf');
+        $fileName = $this->fixFileName($fileName);
 
         return response()->download(
             $this->print($printTemplate, $fileName)->getLocalPath(),
@@ -23,8 +23,23 @@ class Printer
         )->deleteFileAfterSend(true);
     }
 
+    public function preview(PrintTemplate $printTemplate, string $fileName, array $headers = [])
+    {
+        $fileName = $this->fixFileName($fileName);
+
+        response()->file(
+            $this->print($printTemplate, $fileName)->getLocalPath(),
+            $headers
+        );
+    }
+
     protected function print($printTemplate, string $fileName)
     {
         return $this->converter->convert($printTemplate, $fileName);
+    }
+
+    protected function fixFileName(string $fileName)
+    {
+        return Str::finish($fileName, '.pdf');
     }
 }
