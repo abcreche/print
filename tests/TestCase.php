@@ -18,5 +18,6 @@ abstract class TestCase extends Orchestra
     {
         $config = $app->get('config');
         $config->set('logging.default', 'errorlog');
+        $config->set('printer.directory', __DIR__ . DIRECTORY_SEPARATOR . 'tmp');
     }
 }

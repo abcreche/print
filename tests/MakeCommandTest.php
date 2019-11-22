@@ -8,7 +8,7 @@ class MakeCommandTest extends TestCase
     /** @test */
     function make_command_returns_success()
     {
-        $this->artisan('make:print TestDocument')
-            ->expectsOutput('Printable Document created successfully.');
+        $this->artisan('make:print', ['name' => 'TestDocument'])
+            ->assertExitCode(0);
     }
 }

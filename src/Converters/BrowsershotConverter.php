@@ -12,12 +12,12 @@ class BrowsershotConverter implements PDFConverter
 
     public function convert(PrintTemplate $template, $path): PDFConverter
     {
+        $this->path = config('printer.directory') . '/' . $path;
+
         Browsershot::html($template->render()->toHtml())
             ->format('A4')
             ->showBackground()
-            ->save($path);
-
-        $this->path = $path;
+            ->save($this->path);
 
         return $this;
     }
