@@ -11,20 +11,16 @@ class HasViewsTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-
-        view()->addNamespace('printer-test', app_path('tests/Data/view'));
-        dd(app_path('tests/Data/view'));
+        view()->addNamespace('printer-test', dirname(__FILE__) . '/Data/views');
         $this->template = new EmptyPrintTemplate;
     }
 
     /** @test */
     function can_add_a_view()
     {
-        dd(view('printer-test::dummy')->toHtml());
-
         $this->template->addView('printer-test::dummy');
 
-        $this->assertCount(2, $this->template->getViews());
+        $this->assertCount(1, $this->template->getViews());
         $this->assertInstanceOf(Collection::class, $this->template->getImages());
     }
 
