@@ -18,4 +18,12 @@ class PrintTest extends TestCase
         $this->assertInstanceOf(BinaryFileResponse::class, $response);
         $this->assertEquals('attachment; filename=filename.pdf', str_replace('"', '', $response->headers->get('Content-Disposition')));
     }
+
+    /** @test */
+    function can_preview_pdf_in_browser()
+    {
+        $export = new EmptyPrintTemplate();
+        $response = PrinterFacade::preview($export, 'filename.pdf');
+        $this->assertInstanceOf(BinaryFileResponse::class, $response);
+    }
 }

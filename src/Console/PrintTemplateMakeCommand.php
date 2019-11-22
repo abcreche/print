@@ -22,6 +22,13 @@ class PrintTemplateMakeCommand extends GeneratorCommand
     protected $description = 'Create a new print template class';
 
     /**
+     * The type of class being generated.
+     *
+     * @var string
+     */
+    protected $type = 'Printable Document';
+
+    /**
      * Get the stub file for the generator.
      *
      * @return string
