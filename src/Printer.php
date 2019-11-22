@@ -27,10 +27,10 @@ class Printer
     {
         $fileName = $this->fixFileName($fileName);
 
-        response()->file(
+        return response()->file(
             $this->print($printTemplate, $fileName)->getLocalPath(),
             $headers
-        );
+        )->deleteFileAfterSend();
     }
 
     protected function print($printTemplate, string $fileName)
