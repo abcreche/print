@@ -145,7 +145,7 @@ Image from [this stackoverflow post](https://stackoverflow.com/questions/9540990
 Then switch the dev tools to device rendering and set the dimension of the page at
 - A4 : 595 x 842
 
-Working with a preview like this will help you buld your templates. When converting them to pdf, they will be exactly like the preview.
+Working with a preview like this will help you build your templates. When converting them to pdf, they will be exactly like the preview.
 
 ## TODO
 
