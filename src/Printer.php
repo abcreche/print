@@ -33,7 +33,7 @@ class Printer
         )->deleteFileAfterSend();
     }
 
-    protected function print($printTemplate, string $fileName)
+    public function print($printTemplate, string $fileName)
     {
         return $this->converter->convert($printTemplate, $fileName);
     }
