@@ -18,8 +18,8 @@
             }
             @media print {
                 body {
-                    width: 21cm;
-                    height: 29.7cm;
+                    width: {{ $orientation == 'portrait' ? '21cm' : '29.7cm' }};
+                    height: {{ $orientation == 'portrait' ? '29.7cm' : '21cm' }};
                 }
                 @page {
                     size: {{ $orientation == 'portrait' ? '210mm 297mm' : '297mm 210mm' }};
