@@ -2,17 +2,18 @@
 
 namespace ABCreche\Printer;
 
+use Illuminate\View\View;
+use ABCreche\Printer\Traits\HasPages;
+use ABCreche\Printer\Traits\HasViews;
 use ABCreche\Printer\Traits\HasImages;
 use ABCreche\Printer\Traits\HasStyles;
 use ABCreche\Printer\Traits\HasWritings;
 use ABCreche\Printer\Traits\HasOrientation;
-use ABCreche\Printer\Traits\HasViews;
 use Illuminate\Contracts\Support\Renderable;
-use Illuminate\View\View;
 
 abstract class PrintTemplate implements Renderable
 {
-    use HasStyles, HasWritings, HasImages, HasViews, HasOrientation;
+    use HasStyles, HasWritings, HasImages, HasViews, HasOrientation, HasPages;
 
     public $pageMargin;
 
@@ -52,6 +53,7 @@ abstract class PrintTemplate implements Renderable
             ->with('orientation', $this->orientation)
             ->with('images', $this->images)
             ->with('views', $this->views)
+            ->with('pages', $this->getPages())
             ->with('writings', $this->writings);
     }
 

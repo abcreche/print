@@ -27,6 +27,21 @@
                 }
             }
 
+            @media print {
+                .page-break {
+                    position: absolute;
+                    right: 0;
+                    left: 0;
+                }
+
+                @foreach ($pages as $key => $page)
+                    .page-{{$key}} {
+                        top: {{ ($orientation == 'portrait' ? 29.7 : 21) * $key }}cm;
+                        height: {{ $orientation == 'portrait' ? 29.7 : 21 }}cm;
+                    }
+                @endforeach
+            }
+
             .view {position: absolute; z-index: 1;}
             .text {position: absolute; z-index: 2;}
             .image {position: absolute; z-index: 0;}
@@ -73,6 +88,10 @@
 
         @foreach ($images as $key => $image)
             <img src="{{ $image->path }}" class="image image-{{ $key }}">
+        @endforeach
+
+        @foreach ($pages as $key => $page)
+            <div class="page-break page-{{ $key }}"></div>
         @endforeach
     </body>
 </html>
