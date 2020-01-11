@@ -13,7 +13,7 @@ use Illuminate\Contracts\Support\Renderable;
 
 abstract class PrintTemplate implements Renderable
 {
-    use HasStyles, HasWritings, HasImages, HasViews, HasOrientation, HasPages;
+    use HasStyles, HasPages, HasOrientation;
 
     public $pageMargin;
 
@@ -45,16 +45,15 @@ abstract class PrintTemplate implements Renderable
      */
     public function render(): View
     {
+        $this->addPage(); // Always have at least one page
+
         $this->build();
 
         return view('print::layout')
             ->with('styles', $this->styles())
             ->with('pageMargin', $this->pageMargin)
             ->with('orientation', $this->orientation)
-            ->with('images', $this->images)
-            ->with('views', $this->views)
-            ->with('pages', $this->getPages())
-            ->with('writings', $this->writings);
+            ->with('pages', $this->getPages());
     }
 
     public function build()

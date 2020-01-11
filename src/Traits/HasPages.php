@@ -2,38 +2,53 @@
 
 namespace ABCreche\Printer\Traits;
 
-use ABCreche\Printer\Writing;
+use ABCreche\Printer\Models\Page;
 use Illuminate\Support\Collection;
 
 trait HasPages
 {
     /**
-     * Count of pages
+     * Collection of Pages
      */
-    protected $pageCount = 1;
+    protected $pages = [];
 
     /**
-     * Increment the page count
+     * Add a new page in the pages collection
      */
     public function addPage()
     {
-        $this->pageCount++;
+        $this->setPages(
+            $this->getPages()
+                ->push(
+                    new Page
+                )
+        );
 
         return $this;
     }
 
     public function getPagesCount()
     {
-        return $this->pageCount;
+        return $this->getPages()->count();
+    }
+
+    public function firstPage()
+    {
+        return $this->getPages()->first();
+    }
+
+    public function lastPage()
+    {
+        return $this->getPages()->last();
     }
 
     public function getPages(): Collection
     {
-        return collect(range(1, $this->pageCount));
+        return collect($this->pages);
     }
 
-    protected function setPagesCount($count)
+    protected function setPages($pages)
     {
-        $this->pageCount = $count;
+        $this->pages = $pages;
     }
 }

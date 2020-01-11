@@ -72,8 +72,34 @@ class ReceiptTemplate implements PrintTemplate
 {
     public function build()
     {
-        return $this->write('Hello There');
+        $this->firstPage()->write('Hello There');
     }
+}
+```
+
+#### Manage pages and content
+
+Every content you will add on your document needs to be associated to a page.
+
+Because we work with printed document, positioning elements in specific pages is very important.
+
+You can add new pages like this:
+
+```php
+public function build()
+{
+    $this->addPage();
+}
+```
+
+You will then add content in the last page you add.
+
+```php
+public function build()
+{
+    $this->lastPage()->write('I will appear on the first page');
+    $this->addPage();
+    $this->lastPage()->write('I will appear on the second page');
 }
 ```
 
@@ -84,11 +110,13 @@ Let's write some data on the document:
 ```php
 public function build()
 {
-    $this->write($receipt->number)
+    $this->lastPage()
+        ->write($receipt->number)
         ->top('10px')
         ->left('100px');
 
-    $this->write($receipt->total)
+    $this->lastPage()
+        ->write($receipt->total)
         ->bottom('35px')
         ->right('50%');
 
@@ -100,7 +128,8 @@ You can also chain methods
 public function build()
 {
     // Orders of direction is the same as in CSS for padding / margin properties
-    return $this->write($receipt->number, '10px', null, null, '100px')
+    return $this->lastPage()
+        ->write($receipt->number, '10px', null, null, '100px')
         ->write($receipt->total, null, '35px', '50%', null);
 }
 ```
