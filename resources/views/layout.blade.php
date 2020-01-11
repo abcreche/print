@@ -34,14 +34,14 @@
                     left: 0;
                 }
 
-                @foreach ($pages as $key => $page)
-                    .page-{{$key}} {
-                        top: {{ ($orientation == 'portrait' ? 29.7 : 21) * $key }}cm;
+                @foreach ($pages as $pageKey => $page)
+                    .page-{{$pageKey}} {
+                        top: {{ ($orientation == 'portrait' ? 29.7 : 21) * $pageKey }}cm;
                         height: {{ $orientation == 'portrait' ? 29.7 : 21 }}cm;
                     }
 
                     @foreach ($page->getWritings() as $key => $writing)
-                        .text-{{$key}} {
+                        .text-{{ $pageKey }}-{{ $key }} {
                             @foreach ($writing->styles() as $attribute => $property)
                                 @if (!is_null($property))
                                     {{$attribute}} : {{$property}};
@@ -51,7 +51,7 @@
                     @endforeach
 
                     @foreach ($page->getViews() as $key => $view)
-                        .view-{{$key}} {
+                        .view-{{ $pageKey }}-{{ $key }} {
                             @foreach ($view->styles() as $attribute => $property)
                                 @if (!is_null($property))
                                     {{$attribute}} : {{$property}};
@@ -61,7 +61,7 @@
                     @endforeach
 
                     @foreach ($page->getImages() as $key => $image)
-                        .image-{{$key}} {
+                        .image-{{ $pageKey }}-{{ $key }} {
                             @foreach ($image->styles() as $attribute => $property)
                                 @if (!is_null($property))
                                     {{$attribute}} : {{$property}};
@@ -78,19 +78,19 @@
         </style>
     </head>
     <body>
-        @foreach ($pages as $key => $page)
-            <div class="page-break page-{{ $key }}">
+        @foreach ($pages as $pageKey => $page)
+            <div class="page-break page-{{ $pageKey }}">
 
                 @foreach ($page->getViews() as $key => $view)
-                    <div class="view view-{{ $key }}">{!! $view->html !!}</div>
+                    <div class="view view-{{ $pageKey }}-{{ $key }}">{!! $view->html !!}</div>
                 @endforeach
 
                 @foreach ($page->getWritings() as $key => $writing)
-                    <div class="text text-{{ $key }}">{{ $writing->text }}</div>
+                    <div class="text text-{{ $pageKey }}-{{ $key }}">{{ $writing->text }}</div>
                 @endforeach
 
                 @foreach ($page->getImages() as $key => $image)
-                    <img src="{{ $image->path }}" class="image image-{{ $key }}">
+                    <img src="{{ $image->path }}" class="image image-{{ $pageKey }}-{{ $key }}">
                 @endforeach
 
             </div>
