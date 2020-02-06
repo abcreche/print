@@ -18,8 +18,8 @@
             }
             @media print {
                 body {
-                    width: {{ $orientation == 'portrait' ? '21cm' : '29.7cm' }};
-                    height: {{ $orientation == 'portrait' ? '29.7cm' : '21cm' }};
+                    width: {{ $orientation == 'portrait' ? '210mm' : '297mm' }};
+                    height: {{ $orientation == 'portrait' ? '297mm' : '210mm' }};
                 }
                 @page {
                     size: {{ $orientation == 'portrait' ? '210mm 297mm' : '297mm 210mm' }};
@@ -36,8 +36,8 @@
 
                 @foreach ($pages as $pageKey => $page)
                     .page-{{$pageKey}} {
-                        top: {{ ($orientation == 'portrait' ? 29.7 : 21) * $pageKey }}cm;
-                        height: {{ $orientation == 'portrait' ? 29.7 : 21 }}cm;
+                        top: {{ ($orientation == 'portrait' ? 297 : 210) * $pageKey }}mm;
+                        height: {{ $orientation == 'portrait' ? 296 : 210 }}mm;
                     }
 
                     @foreach ($page->getWritings() as $key => $writing)
