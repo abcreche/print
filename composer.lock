@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6d9a33dc431ec98a3d9afe3ed4481756",
+    "content-hash": "52d9534e3d494237a618c83eff505f3f",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -3399,16 +3399,16 @@
         },
         {
             "name": "orchestra/testbench",
-            "version": "v4.7.0",
+            "version": "v4.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchestral/testbench.git",
-                "reference": "133e2756f15e8e605c22973d255290798f933e70"
+                "reference": "8f299c614927de8e1435967606d01078cc4e351c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchestral/testbench/zipball/133e2756f15e8e605c22973d255290798f933e70",
-                "reference": "133e2756f15e8e605c22973d255290798f933e70",
+                "url": "https://api.github.com/repos/orchestral/testbench/zipball/8f299c614927de8e1435967606d01078cc4e351c",
+                "reference": "8f299c614927de8e1435967606d01078cc4e351c",
                 "shasum": ""
             },
             "require": {
@@ -3445,20 +3445,20 @@
                 "orchestral",
                 "testing"
             ],
-            "time": "2020-03-06T23:23:46+00:00"
+            "time": "2020-04-28T00:48:09+00:00"
         },
         {
             "name": "orchestra/testbench-core",
-            "version": "v4.7.0",
+            "version": "v4.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchestral/testbench-core.git",
-                "reference": "fad3769a7903021f5784d5d76aa6eb3a3904b215"
+                "reference": "c8e9ce9578fe13c075751d81f23dc2c3bb37a134"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchestral/testbench-core/zipball/fad3769a7903021f5784d5d76aa6eb3a3904b215",
-                "reference": "fad3769a7903021f5784d5d76aa6eb3a3904b215",
+                "url": "https://api.github.com/repos/orchestral/testbench-core/zipball/c8e9ce9578fe13c075751d81f23dc2c3bb37a134",
+                "reference": "c8e9ce9578fe13c075751d81f23dc2c3bb37a134",
                 "shasum": ""
             },
             "require": {
@@ -3510,7 +3510,7 @@
                 "orchestral",
                 "testing"
             ],
-            "time": "2020-03-06T23:07:37+00:00"
+            "time": "2020-04-11T10:37:21+00:00"
         },
         {
             "name": "phar-io/manifest",
