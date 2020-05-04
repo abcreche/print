@@ -23,7 +23,7 @@
                 }
                 @page {
                     size: {{ $orientation == 'portrait' ? '210mm 297mm' : '297mm 210mm' }};
-                    margin: {{ $pageMargin ?? '30mm 45mm 30mm 45mm' }};
+                    margin: {{ $pageMargin ?? '10mm 10mm 10mm 10mm' }};
                 }
             }
 
