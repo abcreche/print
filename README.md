@@ -181,4 +181,3 @@ Working with a preview like this will help you build your templates. When conver
 Support:
 - https://laravelpackages.net/barryvdh/laravel-snappy
 - https://laravelpackages.net/nitmedia/wkhtml2pdf
-- c
