@@ -18,7 +18,7 @@
     "require": {
         "php": "^7.1",
         "laravel/framework": "5.*|6.*|7.*|8.*",
-        "spatie/browsershot": "^3.37",
+        "spatie/browsershot": "^3.38",
         "dompdf/dompdf": "^0.8.6"
     },
     "require-dev": {
