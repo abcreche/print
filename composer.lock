@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1df379a9d152bdf4a1a22e3c594771a4",
+    "content-hash": "ba1134d8fce0af97ce7cfa2a77da5393",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -1660,16 +1660,16 @@
         },
         {
             "name": "spatie/browsershot",
-            "version": "3.38.0",
+            "version": "3.39.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/browsershot.git",
-                "reference": "97ebb1dc0750f9c543162cb1e44d5b4916b17a7c"
+                "reference": "572968978e5e07513f44819b0e744403c13fa1a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/browsershot/zipball/97ebb1dc0750f9c543162cb1e44d5b4916b17a7c",
-                "reference": "97ebb1dc0750f9c543162cb1e44d5b4916b17a7c",
+                "url": "https://api.github.com/repos/spatie/browsershot/zipball/572968978e5e07513f44819b0e744403c13fa1a1",
+                "reference": "572968978e5e07513f44819b0e744403c13fa1a1",
                 "shasum": ""
             },
             "require": {
@@ -1718,7 +1718,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-09-22T06:26:15+00:00"
+            "time": "2020-09-24T08:59:01+00:00"
         },
         {
             "name": "spatie/image",
