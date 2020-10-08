@@ -35,6 +35,6 @@ class ConverterManager extends Manager
      */
     public function getDefaultDriver()
     {
-        return $this->app['config']['printer.converter'];
+        return $this->container['config']['printer.converter'];
     }
 }
