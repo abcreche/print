@@ -74,7 +74,7 @@
 
             .view {position: absolute; z-index: 1;}
             .text {position: absolute; z-index: 2;}
-            .image {position: absolute; z-index: 0;}
+            .image {position: absolute; z-index: 0;max-width: 100%;}
         </style>
     </head>
     <body>
