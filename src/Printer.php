@@ -33,7 +33,7 @@ class Printer
         )->deleteFileAfterSend();
     }
 
-    public function print($printTemplate, string $fileName)
+    public function print($printTemplate, string $fileName): PDFConverter
     {
         return $this->converter->convert($printTemplate, $fileName);
     }
