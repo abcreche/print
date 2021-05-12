@@ -17,7 +17,7 @@ class Printer
         $fileName = $this->fixFileName($fileName);
 
         return response()->download(
-            $this->print($printTemplate, $fileName)->getLocalPath(),
+            $this->path($printTemplate, $fileName),
             $fileName,
             $headers
         )->deleteFileAfterSend(true);
@@ -28,9 +28,14 @@ class Printer
         $fileName = $this->fixFileName($fileName);
 
         return response()->file(
-            $this->print($printTemplate, $fileName)->getLocalPath(),
+            $this->path($printTemplate, $fileName),
             $headers
         )->deleteFileAfterSend();
+    }
+
+    public function path(PrintTemplate $printTemplate, string $fileName)
+    {
+        return $this->print($printTemplate, $fileName)->getLocalPath();
     }
 
     public function print($printTemplate, string $fileName): PDFConverter
