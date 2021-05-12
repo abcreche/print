@@ -35,6 +35,8 @@ class Printer
 
     public function path(PrintTemplate $printTemplate, string $fileName)
     {
+        $fileName = $this->fixFileName($fileName);
+
         return $this->print($printTemplate, $fileName)->getLocalPath();
     }
 
