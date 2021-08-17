@@ -16,7 +16,7 @@
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": ">7.1",
         "laravel/framework": "7.*|8.*",
         "spatie/browsershot": "^3.39",
         "clegginabox/pdf-merger": "dev-master",
