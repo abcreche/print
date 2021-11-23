@@ -13,8 +13,8 @@ class BrowsershotConverter implements PDFConverter
     public function convert(PrintTemplate $template, $path): PDFConverter
     {
         $folder = config('printer.directory') . '/' . time();
-        if (!is_dir($this->basePath)) {
-            mkdir($this->basePath);
+        if (!is_dir($folder)) {
+            mkdir($folder);
         }
         $this->path = $folder . '/' . $path;
 
