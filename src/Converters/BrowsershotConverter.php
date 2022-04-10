@@ -8,13 +8,20 @@ use ABCreche\Printer\Interfaces\PDFConverter;
 
 class BrowsershotConverter implements PDFConverter
 {
+    private $instanceId;
+
     protected $path;
+
+    public function __construct()
+    {
+        $this->instanceId = uniqid();
+    }
 
     public function convert(PrintTemplate $template, $path): PDFConverter
     {
-        $folder = config('printer.directory') . '/' . time();
+        $folder = config('printer.directory') .'/'. $this->instanceId .'/'. time();
         if (!is_dir($folder)) {
-            mkdir($folder);
+            mkdir($folder, 0777, true);
         }
         $this->path = $folder . '/' . $path;
 
