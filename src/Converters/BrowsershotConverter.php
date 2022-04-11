@@ -19,7 +19,7 @@ class BrowsershotConverter implements PDFConverter
 
     public function convert(PrintTemplate $template, $path): PDFConverter
     {
-        $folder = config('printer.directory') .'/'. $this->instanceId .'/'. time();
+        $folder = config('printer.directory') .'/'. $this->instanceId;
         if (!is_dir($folder)) {
             mkdir($folder, 0777, true);
         }
