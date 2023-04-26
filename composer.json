@@ -16,9 +16,9 @@
         }
     ],
     "require": {
-        "php": ">8.0",
-        "laravel/framework": "8.*|9.*",
-        "spatie/browsershot": "^3.52.3",
+        "php": ">=8.0",
+        "laravel/framework": ">=8",
+        "spatie/browsershot": "^3.57",
         "dompdf/dompdf": "^2.0.0"
     },
     "require-dev": {
