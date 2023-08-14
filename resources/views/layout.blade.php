@@ -23,7 +23,7 @@
                 }
                 @page {
                     size: {{ $orientation == 'portrait' ? '210mm 297mm' : '297mm 210mm' }};
-                    margin: {{ $pageMargin ?? '10mm 10mm 10mm 10mm' }};
+                    margin: {{ is_null($pageMargin) ? '10mm 10mm 10mm 10mm' : $pageMargin }};
                 }
             }
 
@@ -36,8 +36,13 @@
 
                 @foreach ($pages as $pageKey => $page)
                     .page-{{$pageKey}} {
+                        word-break: break-all;
                         top: {{ ($orientation == 'portrait' ? 297 : 210) * $pageKey }}mm;
-                        height: {{ $orientation == 'portrait' ? 296 : 210 }}mm;
+                        height: {{ $orientation == 'portrait' ? 297 : 210 }}mm;
+
+                        @foreach ($page->styles() as $attribute => $property)
+                        {{$attribute}} : {{$property}};
+                        @endforeach
                     }
 
                     @foreach ($page->getWritings() as $key => $writing)
