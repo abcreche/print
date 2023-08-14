@@ -15,23 +15,23 @@ abstract class PrintTemplate implements Renderable
 {
     use HasStyles, HasPages, HasOrientation;
 
-    public $pageMargin;
+    public ?int $pageMargin = null;
 
-    public function serif()
+    public function serif(): self
     {
         $this->style('font-family', 'serif');
 
         return $this;
     }
 
-    public function sansSerif()
+    public function sansSerif(): self
     {
         $this->style('font-family', 'sans-serif');
 
         return $this;
     }
 
-    public function margins(int $pixels)
+    public function margins(int $pixels): self
     {
         $this->pageMargin = $pixels;
 
@@ -40,8 +40,6 @@ abstract class PrintTemplate implements Renderable
 
     /**
      * Render the print temple into a view.
-     *
-     * @return \Illuminate\View\View
      */
     public function render(): View
     {

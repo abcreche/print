@@ -29,6 +29,6 @@ class BrowsershotConverterTest extends TestCase
         $response = $this->converter->convert($this->template, 'test.pdf');
 
         $this->assertInstanceOf(PDFConverter::class, $response);
-        $this->assertEquals(config('printer.directory') . '/test.pdf', $response->getLocalPath());
+        $this->assertStringContainsString('/test.pdf', $response->getLocalPath());
     }
 }

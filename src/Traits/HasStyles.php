@@ -6,12 +6,12 @@ use Illuminate\Support\Collection;
 
 trait HasStyles
 {
-    protected $styles = [];
+    protected array $styles = [];
 
     /**
      * Add one style rule to the styles array
      */
-    public function style($attribute, $property = null)
+    public function style($attribute, $property = null): self
     {
         if (is_array($attribute)) {
             foreach ($attribute as $key => $property) {
@@ -26,8 +26,6 @@ trait HasStyles
 
     /**
      * Get the styles as a Collection
-     *
-     * @return Collection
      */
     public function styles(): Collection
     {

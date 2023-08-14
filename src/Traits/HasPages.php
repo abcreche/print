@@ -10,12 +10,12 @@ trait HasPages
     /**
      * Collection of Pages
      */
-    protected $pages = [];
+    protected array $pages = [];
 
     /**
      * Add a new page in the pages collection
      */
-    public function addPage()
+    public function addPage(): self
     {
         $this->setPages(
             $this->getPages()
@@ -27,17 +27,17 @@ trait HasPages
         return $this;
     }
 
-    public function getPagesCount()
+    public function getPagesCount(): int
     {
         return $this->getPages()->count();
     }
 
-    public function firstPage()
+    public function firstPage(): ?Page
     {
         return $this->getPages()->first();
     }
 
-    public function lastPage()
+    public function lastPage(): ?Page
     {
         return $this->getPages()->last();
     }
@@ -47,8 +47,8 @@ trait HasPages
         return collect($this->pages);
     }
 
-    protected function setPages($pages)
+    protected function setPages(Collection $pages): void
     {
-        $this->pages = $pages;
+        $this->pages = $pages->toArray();
     }
 }

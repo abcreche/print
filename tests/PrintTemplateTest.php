@@ -14,34 +14,38 @@ class PrintTemplateTest extends TestCase
         parent::setUp();
 
         $this->template = new EmptyPrintTemplate;
+        $this->template->addPage();
     }
 
     /** @test */
     function can_write_data()
     {
-        $this->template->write('first data');
+        $this->template->addPage();
+        $this->template->lastPage()->write('first data');
 
-        $this->assertCount(1, $this->template->getWritings());
-        $this->assertEquals('first data', $this->template->getWritings()->first()->text);
+        $this->assertCount(1, $this->template->lastPage()->getWritings());
+        $this->assertEquals('first data', $this->template->lastPage()->getWritings()->first()->text);
     }
 
     /** @test */
     function can_write_data_and_specify_position()
     {
-        $this->template->write('first data')
+        $this->template->addPage();
+        $this->template->lastPage()->write('first data')
             ->left(1)
             ->right(1);
 
-        $this->assertCount(1, $this->template->getWritings());
-        $this->assertEquals('first data', $this->template->getWritings()->first()->text);
+        $this->assertCount(1, $this->template->lastPage()->getWritings());
+        $this->assertEquals('first data', $this->template->lastPage()->getWritings()->first()->text);
     }
 
     /** @test */
     function data_has_zero_position_by_default()
     {
-        $this->template->write('first data');
+        $this->template->addPage();
+        $this->template->lastPage()->write('first data');
 
-        $styles = $this->template->getWritings()->first()->styles();
+        $styles = $this->template->lastPage()->getWritings()->first()->styles();
 
         $this->assertEquals(0, $styles['top']);
         $this->assertEquals(0, $styles['right']);
@@ -52,21 +56,22 @@ class PrintTemplateTest extends TestCase
     /** @test */
     function data_can_be_overriden()
     {
-        $this->template->write('first data')
+        $this->template->addPage();
+        $this->template->lastPage()->write('first data')
             ->top(5)
             ->right(6)
             ->bottom(7)
             ->left(8);
 
-        $styles = $this->template->getWritings()->last()->styles();
+        $styles = $this->template->lastPage()->getWritings()->last()->styles();
 
         $this->assertEquals(5, $styles['top']);
         $this->assertEquals(6, $styles['right']);
         $this->assertEquals(7, $styles['bottom']);
         $this->assertEquals(8, $styles['left']);
 
-        $this->template->write('second data');
-        $styles = $this->template->getWritings()->last()->styles();
+        $this->template->lastPage()->write('second data');
+        $styles = $this->template->lastPage()->getWritings()->last()->styles();
 
         $this->assertEquals(0, $styles['top']);
         $this->assertEquals(0, $styles['right']);
@@ -107,7 +112,8 @@ class PrintTemplateTest extends TestCase
     /** @test */
     function template_can_be_rendered_as_html()
     {
-        $this->template->write('lol');
+        $this->template->addPage();
+        $this->template->lastPage()->write('lol');
 
         $this->assertInstanceOf(View::class, $this->template->render());
         $this->assertStringContainsString('lol', $this->template->render()->toHtml());

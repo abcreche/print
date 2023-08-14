@@ -9,14 +9,14 @@ trait HasOrientation
      */
     protected $orientation = 'portrait';
 
-    public function portrait()
+    public function portrait(): self
     {
         $this->orientation = 'portrait';
 
         return $this;
     }
 
-    public function landscape()
+    public function landscape(): self
     {
         $this->orientation = 'landscape';
 

@@ -4,60 +4,60 @@ namespace ABCreche\Printer;
 
 class UnitConvert
 {
-    public $pixels;
-    public $milimeters;
-    public $inches;
+    public ?int $pixels = null;
+    public ?float $millimeters = null;
+    public ?float $inches = null;
 
     // use 72 DPI dimensions
 
-    public static function pixels($pixels)
+    public static function pixels($pixels): self
     {
         return (new self)->setPixels($pixels);
     }
 
-    public static function milimeters($milimeters)
+    public static function millimeters($millimeters): self
     {
-        return (new self)->setMilimeters($milimeters);
+        return (new self)->setMillimeters($millimeters);
     }
 
-    public static function inches($inches)
+    public static function inches($inches): self
     {
         return (new self)->setInches($inches);
     }
 
-    protected function setPixels($pixels)
+    protected function setPixels($pixels): self
     {
         $this->pixels = $pixels;
 
         return $this;
     }
 
-    protected function setMilimeters($milimeters)
+    protected function setMillimeters($millimeters): self
     {
-        $this->milimeters = $milimeters;
+        $this->millimeters = $millimeters;
 
         return $this;
     }
 
-    protected function setInches($inches)
+    protected function setInches($inches): self
     {
         $this->inches = $inches;
 
         return $this;
     }
 
-    public function toPixels()
+    public function toPixels(): string
     {
         return $this->prependUnit('px', function () {
-            if ($this->milimeters) {
-                return $this->milimeters * 595 / 210;
+            if ($this->millimeters) {
+                return $this->millimeters * 595 / 210;
             }
 
             return $this->pixels;
         });
     }
 
-    public function toMilimeters()
+    public function toMillimeters(): string
     {
         return $this->prependUnit('mm', function () {
             if (!is_null($this->inches)) {
@@ -66,14 +66,14 @@ class UnitConvert
             if (!is_null($this->pixels)) {
                 return $this->pixels / 595 * 210;
             }
-            return $this->milimeters;
+            return $this->millimeters;
         });
     }
 
-    public function toInches()
+    public function toInches(): int
     {
-        if ($this->milimeters) {
-            return $this->milimeters / 25.4;
+        if ($this->millimeters) {
+            return $this->millimeters / 25.4;
         }
 
         if (!is_null($this->pixels)) {
@@ -83,7 +83,7 @@ class UnitConvert
         return $this->inches;
     }
 
-    public function prependUnit($unit, $callback)
+    public function prependUnit(string $unit, $callback): string
     {
         $digit = $callback();
 

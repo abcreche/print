@@ -9,13 +9,13 @@ class Image
 {
     use HasStyles;
 
-    public $path;
-    public $top;
-    public $right;
-    public $bottom;
-    public $left;
+    public string $path;
+    public int $top;
+    public int $right;
+    public int $bottom;
+    public int $left;
 
-    public static function make($path, $top, $right, $bottom, $left)
+    public static function make(string $path, int $top, int $right, int $bottom, int $left): self
     {
         $image = new self;
         $image->path = $path;

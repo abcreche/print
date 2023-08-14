@@ -11,12 +11,12 @@ trait HasImages
     /**
      * An array of image which needs to be printed.
      */
-    protected $images = [];
+    protected array $images = [];
 
     /**
      * Adds an image in the images collection
      */
-    public function addImage(string $path, $top = 0, $right = 0, $bottom = 0, $left = 0)
+    public function addImage(string $path, $top = 0, $right = 0, $bottom = 0, $left = 0): self
     {
         $this->setImages(
             $this->getImages()
@@ -33,8 +33,8 @@ trait HasImages
         return collect($this->images);
     }
 
-    protected function setImages($images)
+    protected function setImages(Collection $images): void
     {
-        $this->images = $images;
+        $this->images = $images->toArray();
     }
 }

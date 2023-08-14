@@ -8,9 +8,9 @@ class Writing
 {
     use HasStyles;
 
-    public $text;
+    public string $text;
 
-    public static function make($text, $top, $right, $bottom, $left, array $styles = [])
+    public static function make($text, $top, $right, $bottom, $left, array $styles = []): self
     {
         return (new self)
             ->text($text)
@@ -21,35 +21,35 @@ class Writing
             ->style($styles);
     }
 
-    public function text(string $text)
+    public function text(string $text): self
     {
         $this->text = $text;
 
         return $this;
     }
 
-    public function top($unit)
+    public function top($unit): self
     {
         $this->style('top', $unit);
 
         return $this;
     }
 
-    public function right($unit)
+    public function right($unit): self
     {
         $this->style('right', $unit);
 
         return $this;
     }
 
-    public function bottom($unit)
+    public function bottom($unit): self
     {
         $this->style('bottom', $unit);
 
         return $this;
     }
 
-    public function left($unit)
+    public function left($unit): self
     {
         $this->style('left', $unit);
 

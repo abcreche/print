@@ -10,12 +10,12 @@ trait HasWritings
     /**
      * An array of texts which needs to be printed.
      */
-    protected $writings = [];
+    protected array $writings = [];
 
     /**
      * Adds some text in the writings collection
      */
-    public function write(string $text = '', $top = null, $right = null, $bottom = null, $left = null, array $styles = [])
+    public function write(string $text = '', $top = null, $right = null, $bottom = null, $left = null, array $styles = []): self
     {
         $this->setWritings(
             $this->getWritings()
@@ -27,7 +27,7 @@ trait HasWritings
         return $this;
     }
 
-    public function top($position, $unit = 'pixels')
+    public function top($position, $unit = 'pixels'): self
     {
         $writing = $this->lastWriting();
         $writing->top($position);
@@ -37,7 +37,7 @@ trait HasWritings
         return $this;
     }
 
-    public function right($position, $unit = 'pixels')
+    public function right($position, $unit = 'pixels'): self
     {
         $writing = $this->lastWriting();
         $writing->right($position);
@@ -47,7 +47,7 @@ trait HasWritings
         return $this;
     }
 
-    public function bottom($position, $unit = 'pixels')
+    public function bottom($position, $unit = 'pixels'): self
     {
         $writing = $this->lastWriting();
         $writing->bottom($position);
@@ -57,7 +57,7 @@ trait HasWritings
         return $this;
     }
 
-    public function left($position, $unit = 'pixels')
+    public function left($position, $unit = 'pixels'): self
     {
         $writing = $this->lastWriting();
         $writing->left($position);
@@ -72,9 +72,9 @@ trait HasWritings
         return collect($this->writings);
     }
 
-    protected function setWritings($writings)
+    protected function setWritings(Collection $writings): void
     {
-        $this->writings = $writings;
+        $this->writings = $writings->toArray();
     }
 
     protected function lastWriting(): Writing
@@ -82,7 +82,7 @@ trait HasWritings
         return $this->getWritings()->last();
     }
 
-    protected function replaceLastWriting(Writing $writing)
+    protected function replaceLastWriting(Writing $writing): void
     {
         $writings = $this->getWritings();
         $writings->pop();

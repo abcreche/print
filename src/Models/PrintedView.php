@@ -8,13 +8,13 @@ class PrintedView
 {
     use HasStyles;
 
-    public $html;
-    public $top;
-    public $right;
-    public $bottom;
-    public $left;
+    public string $html;
+    public int $top;
+    public int $right;
+    public int $bottom;
+    public int $left;
 
-    public static function make($html, $top, $right, $bottom, $left)
+    public static function make(string $html, int $top, int $right, int $bottom, int $left)
     {
         $view = new self;
         $view->html = $html;

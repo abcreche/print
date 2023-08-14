@@ -13,22 +13,23 @@ class HasImagesTest extends TestCase
         parent::setUp();
 
         $this->template = new EmptyPrintTemplate;
+        $this->template->addPage();
     }
 
     /** @test */
     function can_add_an_image()
     {
-        $this->template->addImage('/dummy/image/path.jpg');
-        $this->template->addImage('/dummy/image/second/path.png');
+        $this->template->lastPage()->addImage('/dummy/image/path.jpg');
+        $this->template->lastPage()->addImage('/dummy/image/second/path.png');
 
-        $this->assertCount(2, $this->template->getImages());
-        $this->assertInstanceOf(Collection::class, $this->template->getImages());
+        $this->assertCount(2, $this->template->lastPage()->getImages());
+        $this->assertInstanceOf(Collection::class, $this->template->lastPage()->getImages());
     }
 
     /** @test */
     function with_position()
     {
-        $this->template->addImage('/dummy/image/path.jpg', 1, 2, 3, 4);
+        $this->template->lastPage()->addImage('/dummy/image/path.jpg', 1, 2, 3, 4);
 
         $html = $this->template->render()->toHtml();
         $this->assertStringContainsString('top : 1px;', $html);

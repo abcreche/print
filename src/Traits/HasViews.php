@@ -12,12 +12,12 @@ trait HasViews
     /**
      * An array of views which needs to be printed.
      */
-    protected $views = [];
+    protected array $views = [];
 
     /**
      * Adds an view in the views collection
      */
-    public function addView(string $path, array $data = [], $top = 0, $right = 0, $bottom = 0, $left = 0)
+    public function addView(string $path, array $data = [], $top = 0, $right = 0, $bottom = 0, $left = 0): self
     {
         $html = view($path, $data)->toHtml();
         $this->setViews(
@@ -35,8 +35,8 @@ trait HasViews
         return collect($this->views);
     }
 
-    protected function setViews($views)
+    protected function setViews(Collection $views): void
     {
-        $this->views = $views;
+        $this->views = $views->toArray();
     }
 }
