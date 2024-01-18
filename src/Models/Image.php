@@ -10,12 +10,12 @@ class Image
     use HasStyles;
 
     public string $path;
-    public int $top;
-    public int $right;
-    public int $bottom;
-    public int $left;
+    public $top;
+    public $right;
+    public $bottom;
+    public $left;
 
-    public static function make(string $path, int $top, int $right, int $bottom, int $left): self
+    public static function make(string $path, $top = null, $right = null, $bottom = null, $left = null): self
     {
         $image = new self;
         $image->path = $path;
