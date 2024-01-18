@@ -15,14 +15,16 @@ trait HasWritings
     /**
      * Adds some text in the writings collection
      */
-    public function write(string $text = '', $top = null, $right = null, $bottom = null, $left = null, array $styles = []): self
+    public function write($text = null, $top = null, $right = null, $bottom = null, $left = null, array $styles = []): self
     {
-        $this->setWritings(
-            $this->getWritings()
-                ->push(
-                    Writing::make($text, $top, $right, $bottom, $left, $styles)
-                )
-        );
+        if ($text) {
+            $this->setWritings(
+                $this->getWritings()
+                    ->push(
+                        Writing::make($text, $top, $right, $bottom, $left, $styles)
+                    )
+            );
+        }
 
         return $this;
     }
