@@ -19,7 +19,7 @@
             @media print {
                 body {
                     width: {{ $orientation == 'portrait' ? '210mm' : '297mm' }};
-                    height: {{ $orientation == 'portrait' ? '297mm' : '210mm' }};
+                    height: auto;
                 }
                 @page {
                     size: {{ $orientation == 'portrait' ? '210mm 297mm' : '297mm 210mm' }};
@@ -29,16 +29,23 @@
 
             @media print {
                 .page-break {
-                    position: absolute;
+                    position: relative;
                     right: 0;
                     left: 0;
+                    height: {{ $orientation == 'portrait' ? 297 : 210 }}mm;
+                    overflow: hidden;
+                    page-break-after: always;
+                    break-after: page;
+                }
+
+                .page-break:last-child {
+                    page-break-after: auto;
+                    break-after: auto;
                 }
 
                 @foreach ($pages as $pageKey => $page)
                     .page-{{$pageKey}} {
                         word-break: break-all;
-                        top: {{ ($orientation == 'portrait' ? 297 : 210) * $pageKey }}mm;
-                        height: {{ $orientation == 'portrait' ? 297 : 210 }}mm;
 
                         @foreach ($page->styles() as $attribute => $property)
                         {{$attribute}} : {{$property}};
