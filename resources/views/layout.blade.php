@@ -32,8 +32,13 @@
                     position: relative;
                     right: 0;
                     left: 0;
-                    height: {{ $orientation == 'portrait' ? 297 : 210 }}mm;
-                    overflow: hidden;
+                    /*
+                     * min-height (not a fixed height + overflow:hidden) so a page whose
+                     * content is longer than one sheet flows/paginates across pages instead
+                     * of being clipped. page-break-after still gives each logical page its
+                     * own sheet, so multi-page merges stay aligned (no pixel drift).
+                     */
+                    min-height: {{ $orientation == 'portrait' ? 297 : 210 }}mm;
                     page-break-after: always;
                     break-after: page;
                 }
@@ -84,7 +89,9 @@
                 @endforeach
             }
 
-            .view {position: absolute; z-index: 1;}
+            /* relative (in-flow) so a long view paginates cleanly across pages; absolute
+               would take it out of flow and let page-break-after clip the overflow. */
+            .view {position: relative; z-index: 1;}
             .text {position: absolute; z-index: 2;}
             .image {position: absolute; z-index: 0;max-width: 100%;}
         </style>
